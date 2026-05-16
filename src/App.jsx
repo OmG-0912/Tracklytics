@@ -38,8 +38,9 @@ function App() {
           
           {/* Admin Routes */}
           <Route path="/admin" element={<AdminDashboard />} />
+          <Route path="/admin/approvals" element={<ManagerApproval />} />
           <Route path="/admin/shared-goals" element={<SharedGoals />} />
-          <Route path="/admin/reporting" element={<Reporting />} />
+          <Route path="/admin/analytics" element={<Reporting />} />
           <Route path="/admin/audit" element={<AuditTrail />} />
         </Route>
       </Routes>

@@ -71,14 +71,17 @@ const activityTimeline = [
 ];
 
 export default function EmployeeDashboard() {
+  const role = localStorage.getItem('role') || 'employee';
+  const firstName = role === 'employee' ? 'Aanya' : role === 'manager' ? 'Devon' : 'Priya';
+
   return (
     <div className="space-y-6 max-w-7xl mx-auto pb-12">
       
       {/* Header Section */}
       <div className="flex flex-col md:flex-row justify-between items-start md:items-center border-b pb-6">
         <div>
-          <div className="text-xs font-bold tracking-widest text-primary uppercase mb-2">Employee Workspace · Q2 FY26</div>
-          <h1 className="text-4xl font-bold tracking-tight text-slate-900 dark:text-white">Welcome back, Aanya</h1>
+          <div className="text-xs font-bold tracking-widest text-primary uppercase mb-2">{role} Workspace · Q2 FY26</div>
+          <h1 className="text-4xl font-bold tracking-tight text-slate-900">Welcome back, {firstName}</h1>
           <p className="text-slate-500 mt-2 text-sm max-w-xl leading-relaxed">
             Here's your goal momentum for this quarter. Stay close to the 100% weightage rule and keep check-ins crisp.
           </p>
@@ -253,7 +256,7 @@ export default function EmployeeDashboard() {
                   <Target className="text-indigo-500 mt-1 shrink-0" size={20} />
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-1">
-                      <h4 className="font-bold text-slate-900 dark:text-white text-sm">{goal.title}</h4>
+                      <h4 className="font-bold text-slate-900 text-sm">{goal.title}</h4>
                       <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold border ${goal.statusColor}`}>
                         {goal.status}
                       </span>
@@ -295,13 +298,13 @@ export default function EmployeeDashboard() {
       </div>
 
       {/* Bottom Coach Tip */}
-      <div className="w-full bg-white dark:bg-slate-900 border border-slate-200 rounded-2xl p-5 flex flex-col md:flex-row items-center justify-between shadow-sm">
+      <div className="w-full bg-white border border-slate-200 rounded-2xl p-5 flex flex-col md:flex-row items-center justify-between shadow-sm">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 rounded-xl bg-indigo-50 border border-indigo-100 flex items-center justify-center text-indigo-600 shrink-0">
             <Sparkles size={24} />
           </div>
           <div>
-            <h4 className="font-bold text-slate-900 dark:text-white text-base mb-1">Coach tip: schedule your mid-quarter check-in</h4>
+            <h4 className="font-bold text-slate-900 text-base mb-1">Coach tip: schedule your mid-quarter check-in</h4>
             <p className="text-sm text-slate-500">Employees who log a check-in by week 6 close their quarter 14% stronger on average.</p>
           </div>
         </div>

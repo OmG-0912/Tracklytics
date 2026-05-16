@@ -40,7 +40,7 @@ export default function Login() {
         <div className="z-10">
           <div className="flex items-center gap-3 text-white text-2xl font-bold">
             <Target className="text-primary" size={32} />
-            Goalkeeper OS
+            Tracklytics OS
           </div>
         </div>
 
