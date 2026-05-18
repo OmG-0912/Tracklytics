@@ -72,8 +72,8 @@ export default function AdminDashboard() {
     const fetchData = async () => {
       try {
         const [usersRes, goalsRes] = await Promise.all([
-          fetch('http://127.0.0.1:8000/api/users'),
-          fetch('http://127.0.0.1:8000/api/goals')
+          fetch((import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000') + '/api/users'),
+          fetch((import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000') + '/api/goals')
         ]);
         
         const usersData = await usersRes.json();

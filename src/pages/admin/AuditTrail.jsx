@@ -36,7 +36,7 @@ export default function AuditTrail() {
   const filters = ['All', 'Admin', 'Manager', 'Employee', 'System'];
 
   useEffect(() => {
-    fetch('http://127.0.0.1:8000/api/audit-logs')
+    fetch((import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000') + '/api/audit-logs')
       .then(res => res.json())
       .then(data => {
         if (data.status === 'success') {

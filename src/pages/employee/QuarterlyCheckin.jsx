@@ -26,7 +26,7 @@ export default function QuarterlyCheckin() {
   useEffect(() => {
     const fetchGoals = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/goals/user/U301');
+        const response = await fetch((import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000') + '/api/goals/user/U301');
         const data = await response.json();
         if (data.status === 'success') {
           const mapped = data.data.map(g => ({
@@ -50,7 +50,7 @@ export default function QuarterlyCheckin() {
     };
     const fetchComments = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/comments/user/U301');
+        const response = await fetch((import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000') + '/api/comments/user/U301');
         const data = await response.json();
         if (data.status === 'success') {
           setComments(data.data);
@@ -68,7 +68,7 @@ export default function QuarterlyCheckin() {
     try {
       for (const goal of goals) {
         if (checkInText[goal.id]) {
-          await fetch('http://127.0.0.1:8000/api/check-ins', {
+          await fetch((import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000') + '/api/check-ins', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -95,7 +95,7 @@ export default function QuarterlyCheckin() {
     if (!newComment.trim()) return;
     setIsPosting(true);
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/comments', {
+      const response = await fetch((import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000') + '/api/comments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

@@ -30,7 +30,7 @@ export default function ManagerApproval() {
     const fetchTeamAndGoals = async () => {
       try {
         // Fetch all users and filter by managerId (e.g. U201) unless admin
-        const userRes = await fetch('http://127.0.0.1:8000/api/users');
+        const userRes = await fetch((import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000') + '/api/users');
         const userData = await userRes.json();
         let teamUsers = [];
         if (userData.status === 'success') {
@@ -38,13 +38,13 @@ export default function ManagerApproval() {
         }
 
         // Fetch team goals
-        const goalsUrl = role === 'admin' ? 'http://127.0.0.1:8000/api/goals' : 'http://127.0.0.1:8000/api/goals/team/U201';
+        const goalsUrl = role === 'admin' ? (import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000') + '/api/goals' : (import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000') + '/api/goals/team/U201';
         const goalsRes = await fetch(goalsUrl);
         const goalsData = await goalsRes.json();
         const teamGoals = goalsData.status === 'success' ? goalsData.data : [];
 
         // Fetch comments for all team members
-        const commentsPromises = teamUsers.map(u => fetch(`http://127.0.0.1:8000/api/comments/user/${u.id}`).then(res => res.json()));
+        const commentsPromises = teamUsers.map(u => fetch(`${import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'}/api/comments/user/${u.id}`).then(res => res.json()));
         const commentsResponses = await Promise.all(commentsPromises);
         const teamCommentsMap = {};
         teamUsers.forEach((u, index) => {
@@ -106,7 +106,7 @@ export default function ManagerApproval() {
 
   const updateGoalStatus = async (goalId, newStatus) => {
     try {
-      const res = await fetch(`http://127.0.0.1:8000/api/goals/${goalId}/status`, {
+      const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'}/api/goals/${goalId}/status`, {
         method: 'PATCH',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ status: newStatus })
@@ -137,7 +137,7 @@ export default function ManagerApproval() {
     if (!text || !text.trim()) return;
     setIsPosting(true);
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/comments', {
+      const response = await fetch((import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000') + '/api/comments', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

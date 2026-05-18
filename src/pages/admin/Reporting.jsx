@@ -51,7 +51,7 @@ export default function Reporting() {
   useEffect(() => {
     const fetchGoals = async () => {
       try {
-        const url = role === 'admin' ? 'http://127.0.0.1:8000/api/goals' : 'http://127.0.0.1:8000/api/goals/team/U201';
+        const url = role === 'admin' ? (import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000') + '/api/goals' : (import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000') + '/api/goals/team/U201';
         const response = await fetch(url);
         const data = await response.json();
         if (data.status === 'success') {

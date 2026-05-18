@@ -35,7 +35,7 @@ export default function SharedGoals() {
   const handlePushKPI = async () => {
     setIsPushing(true);
     try {
-      const response = await fetch('http://127.0.0.1:8000/api/shared-kpis', {
+      const response = await fetch((import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000') + '/api/shared-kpis', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -72,7 +72,7 @@ export default function SharedGoals() {
   useEffect(() => {
     const fetchKPIs = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/shared-kpis');
+        const response = await fetch((import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000') + '/api/shared-kpis');
         const data = await response.json();
         if (data.status === 'success') {
           // Map to match the frontend expected structure

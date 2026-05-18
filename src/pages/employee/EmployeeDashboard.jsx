@@ -54,7 +54,7 @@ export default function EmployeeDashboard() {
   useEffect(() => {
     const fetchGoals = async () => {
       try {
-        const response = await fetch('http://127.0.0.1:8000/api/goals/user/U301');
+        const response = await fetch((import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000') + '/api/goals/user/U301');
         const data = await response.json();
         if (data.status === 'success') {
           const mapped = data.data.map(g => {

@@ -68,8 +68,8 @@ export default function DashboardLayout() {
     const fetchData = async () => {
       try {
         const [goalsRes, usersRes] = await Promise.all([
-          fetch('http://127.0.0.1:8000/api/goals'),
-          fetch('http://127.0.0.1:8000/api/users')
+          fetch((import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000') + '/api/goals'),
+          fetch((import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000') + '/api/users')
         ]);
         const goalsData = await goalsRes.json();
         const usersData = await usersRes.json();
@@ -85,7 +85,7 @@ export default function DashboardLayout() {
     const fetchComments = async () => {
       try {
         const userId = role === 'employee' ? 'U301' : 'U301'; // Mocking checking U301's thread
-        const res = await fetch(`http://127.0.0.1:8000/api/comments/user/${userId}`);
+        const res = await fetch(`${import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000'}/api/comments/user/${userId}`);
         const data = await res.json();
         if (data.status === 'success') {
           const recent = data.data.filter(c => role === 'employee' ? c.role === 'MANAGER' : c.role === 'EMPLOYEE');
